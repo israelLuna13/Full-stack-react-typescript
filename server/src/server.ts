@@ -1,8 +1,10 @@
 import express from 'express'
 import colors from 'colors'
+import cors from 'cors'
 import db from './config/db.js'
 import router from './routes/router.js'
 import routerUser from './routes/authRoutes.js'
+import { corsConfig } from './config/cors.js'
 
 const server = express()
 //read data on form
@@ -20,6 +22,7 @@ async function conectDB(){
     }
 }
 conectDB()
+// server.use(cors(corsConfig))
 
 //rutes
 server.use('/api/products',router)

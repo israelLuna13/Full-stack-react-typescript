@@ -1,22 +1,21 @@
 import { Router } from "express";
 import { ProductHandler } from "../handlers/product.js";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { handleInputErrors } from "../middleware/validation.js";
+import { AuthHandler } from "../handlers/user.js";
 const router = Router()
-router.get('/',(req,res)=>{
-    res.json('DESDE GET')
-})
+router.get('/',ProductHandler.getProducts)
+router.get('/:id',param('id').isInt().withMessage('ID is incorrect'),handleInputErrors,ProductHandler.getProductById)
 router.post('/',body("name").notEmpty().withMessage("Product name is required"),
                 body('price').isNumeric().withMessage('incorrect value').notEmpty().withMessage('Price is required').custom(value => value > 0),
                 handleInputErrors,
                 ProductHandler.createProduct)
 
-router.put('/',(req,res)=>{
-    res.json('DESDE PUT')
-})
-
-router.delete('/',(req,res)=>{
-    res.json('DESDE DELETE')
-})
+router.put('/:id',param('id').isInt().withMessage('ID is incorrect'),
+                body("name").notEmpty().withMessage("Product name is required"),
+                body('price').isNumeric().withMessage('incorrect value').notEmpty().withMessage('Price is required').custom(value => value > 0),
+                body('availability').isBoolean().withMessage('Value incorrect'),handleInputErrors,ProductHandler.updateProduct)
+router.patch('/:id',param('id').isInt().withMessage('ID no es valido'),handleInputErrors,ProductHandler.updateAvailable)
+router.delete('/:id',param('id').isInt().withMessage('ID no es valido'),handleInputErrors,ProductHandler.deleteProduct)
 
 export default router
