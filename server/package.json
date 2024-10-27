@@ -5,21 +5,25 @@
   "description": "backend",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon --exec tsx src/index.ts",
+    "dev": "nodemon --exec tsx src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "israel luna",
   "license": "ISC",
   "dependencies": {
+    "@types/nodemailer": "^6.4.15",
+    "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
     "mysql2": "^3.11.3",
+    "nodemailer": "^6.9.14",
     "sequelize": "^6.37.5",
     "sequelize-typescript": "^2.1.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",

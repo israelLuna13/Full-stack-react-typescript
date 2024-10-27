@@ -2,6 +2,7 @@ import express from 'express'
 import colors from 'colors'
 import db from './config/db.js'
 import router from './routes/router.js'
+import routerUser from './routes/authRoutes.js'
 
 const server = express()
 //read data on form
@@ -22,4 +23,5 @@ conectDB()
 
 //rutes
 server.use('/api/products',router)
+server.use('/api/auth',routerUser)
 export default server
