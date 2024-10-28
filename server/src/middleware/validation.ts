@@ -1,10 +1,12 @@
 import {Request,Response,NextFunction} from 'express'
 import { validationResult } from 'express-validator'
 //validate data that comes of form 
-export const handleInputErrors=(req:Request,res:Response, next:NextFunction)=>{
+export const handleInputErrors=(req:Request,res:Response, next:NextFunction):void=>{
     let errors = validationResult(req)
     
-    if(!errors.isEmpty())
-        return res.status(400).json({errors:errors.array()})
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()})
+        return;
+    }
     next()
 }

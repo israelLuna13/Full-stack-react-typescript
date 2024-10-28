@@ -1,5 +1,5 @@
 import { Table,Column,Model,DataType,Default, PrimaryKey, AutoIncrement } from "sequelize-typescript";
-import User from "./User.model.js";
+import User from "./User.model";
 
 @Table({
     tableName:'tokens',

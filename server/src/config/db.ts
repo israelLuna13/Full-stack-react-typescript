@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from 'dotenv'
-import Product from "../models/Product.model.js";
-import User from "../models/User.model.js";
-import Token from "../models/Token.js";
+import Product from "../models/Product.model";
+import User from "../models/User.model";
+import Token from "../models/Token";
 dotenv.config()
 
 const db = new Sequelize({
@@ -13,4 +13,6 @@ const db = new Sequelize({
     models: [Product,User,Token],
     logging: false
 })
+
+
 export default db;
