@@ -9,6 +9,7 @@ export class ProductHandler{
                ]
             })
             res.json({data:products})
+            return
       // try {
       //    const products = await Product.findAll({
       //       order:[
@@ -51,6 +52,7 @@ export class ProductHandler{
      static createProduct = async(req:Request,res:Response):Promise<void>=>{
         const product = await Product.create(req.body)
         res.status(201).json({data:product})
+        return
      }
      static updateProduct= async(req:Request,res:Response)=>{
       const {id} = req.params
@@ -66,6 +68,7 @@ export class ProductHandler{
       await product.update(req.body)
       await product.save()
       res.json({data:product})
+      return;
      }
 
      static updateAvailable= async(req:Request,res:Response):Promise<void>=>{
@@ -82,6 +85,7 @@ export class ProductHandler{
       product.availability = !product.dataValues.availability
       await product.save()
       res.json({data:product})
+      return
      }
      static deleteProduct = async(req:Request,res:Response):Promise<void>=>{
       const {id} = req.params
@@ -95,5 +99,6 @@ export class ProductHandler{
       }
       await product.destroy()
       res.json({data:'product deleted'})
+      return
      }
 }
