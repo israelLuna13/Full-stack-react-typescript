@@ -59,9 +59,11 @@ export class AuthHandler{
             //save user and delete token
             await Promise.allSettled([user.save(),tokenExist.destroy()])
             res.send('Account confirmed successfully')
+            return
         }catch(error){
+            console.log(error);
             res.status(500).json({error:'There was error'})
-
+            return
         }
     }
 
@@ -104,10 +106,11 @@ export class AuthHandler{
         //res.send('Authenticated')
         const token = generateJWT({id:user.id})
         res.send(token)
+        return
       } catch (error) {
         console.log(error);
         res.status(500).json({error:'There was error'})
-        
+        return
       }
         
     }
@@ -142,13 +145,13 @@ export class AuthHandler{
 
             await token.save()
             res.send('Email send with the token to your email ')
+            return
 
         } catch (error) {
             console.log(error);
             res.status(500).json({error:'There was error'})
-            
+            return
         }
-
     }
 
     static forgotPassword= async (req:Request,res:Response):Promise<void>=>{
@@ -175,9 +178,10 @@ export class AuthHandler{
             })
             res.send('Check your email and follow instructions')
         } catch (error) {
+            console.log(error);
             res.status(500).json({error:'There was error'})
+            return
         }
-
     }
 
     static validateToken = async(req:Request,res:Response):Promise<void>=>{
@@ -192,9 +196,11 @@ export class AuthHandler{
                 return;
             }
             res.send('Token validate, Enter new password')
+            return
         } catch (error) {
+            console.log(error);
             res.status(500).json({error:'There was error'})
-            
+            return
         }
     }
     static updatePasswordWithToken = async(req:Request,res:Response):Promise<void>=>
@@ -208,13 +214,16 @@ export class AuthHandler{
             {
                 const error = new Error('Token is not valide')
                 res.status(404).json({error:error.message})
+                return
             }
             const user = await User.findByPk(tokenExist.userId)
             user.password = await hashPassword(password)
             await Promise.allSettled([user.save(),tokenExist.destroy()])
             res.send('The password was modfificated successfully')
         } catch (error) {
+            console.log();
             res.status(500).json({error:'There was error'})   
+            return
         }
     }
     static user= async(req:Request,res:Response):Promise<void>=>
@@ -244,8 +253,11 @@ export class AuthHandler{
         try {
             await userExist.save()
             res.send('Profile update successfully')
+            return
         } catch (error) {
+            console.log(error);
             res.status(500).json({error:'There was error'})
+            return
         }
     }
 
@@ -268,6 +280,7 @@ export class AuthHandler{
             res.send('Password changed successfully')
             return;
         } catch (error) {
+            console.log(error);
             res.status(500).json({error:'There was error'})
             return
         }
@@ -285,4 +298,13 @@ export class AuthHandler{
         res.send('Correct password')
         return
     }  
+    private static async _findAndValidateToken(token: string): Promise<Token> {
+        const tokenExist = await Token.findOne({ where: { token } });
+        
+        if (!tokenExist) {
+            throw new Error('Token is not valid');
+        }
+    
+        return tokenExist;
+    }
 }
