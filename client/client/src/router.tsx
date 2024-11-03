@@ -1,16 +1,25 @@
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {createBrowserRouter} from 'react-router-dom'
 import AppLayout from './layouts/AppLayout'
-import Dashboard from './views/Dashboard'
+import Products from './views/Products'
+import NewProduct,{action as newProductAction} from './views/NewProduct'
 
-export default function Router(){
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route element={<AppLayout/>}>
-                    <Route path='/' element={<Dashboard/>} index />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-
-    )
-}
+export const router = createBrowserRouter([
+    //route 
+    {
+        path:'/',
+        element:<AppLayout/>,
+        children:[
+            {
+                index:true,
+                element:<Products/>
+            },
+            {
+                path:'products/new',
+                element:<NewProduct/>,
+                action:newProductAction
+            }
+        ]
+    }
+ 
+    ]
+)

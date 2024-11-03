@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import NavMenu from "../components/NavMenu";
+import { ToastContainer } from "react-toastify";
 
 export default function AppLayout() {
   return (
@@ -9,10 +9,10 @@ export default function AppLayout() {
                 <div className="mx-auto max-w-6xl py-10">
                     <h1 className='text-4xl font-extrabold text-white'>Administrador de productos</h1>
                 </div>
-                <NavMenu/>
             </div>
         </header>
         <section className="max-m-scree-2xl max-auto mt-10 p-5">
+            {/* put all elements child */}
             <Outlet/>
         </section>
 
@@ -21,7 +21,12 @@ export default function AppLayout() {
                 Todos los derechos resersvados {new Date().getFullYear()}
             </p>
         </footer>
-    
+        
+        {/* show notify */}
+            <ToastContainer
+                 pauseOnHover={false}
+                 pauseOnFocusLoss={false}
+            />
     </>
   )
 }
