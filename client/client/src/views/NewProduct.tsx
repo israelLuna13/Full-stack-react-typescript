@@ -8,14 +8,11 @@ export async function action({request}:ActionFunctionArgs)
     //get data form
     const data = Object.fromEntries(await request.formData())
     let error=''
-
-    console.log(data);
     
     //check that if there is not input empty
     if(Object.values(data).includes(''))
-    {
         error = 'All input is required'
-    }
+    
     if(error.length)
         return error
 
@@ -32,8 +29,8 @@ export default function NewProduct() {
                 <h2 className='text-4xl font-black text-slate-500'>
                     Register product
                 </h2>
-                <Link to={'/'} className="rounded-md bg-indigo-600 p-3 text-sm font-bold text-white shadow-sm hover:bg-indigo-500">
-                  get back
+                <Link to={'/'} className="rounded-md bg-blue-600 p-3 text-sm font-bold text-white shadow-sm hover:bg-blue-500">
+                  Return to products
                 </Link>
             </div>
             {error && <ErrorMessage>{error}</ErrorMessage> }
@@ -51,20 +48,20 @@ export default function NewProduct() {
                 </div>
                 <div className="mb-4">
                     <label className="text-gray-800" htmlFor="price">
-                        Precio:
+                        Price:
                     </label>
                     <input
                         id="price"
                         type="number"
                         className="mt-2 block w-full p-3 bg-gray-50"
-                        placeholder="Precio Producto. ej. 200, 300"
+                        placeholder="Price produc. ej. 200, 300"
                         name="price"
                     />
                 </div>
                 <input
           type="submit"
-          className="mt-5 w-full bg-indigo-600 p-2 text-white font-bold text-lg cursor-pointer rounded"
-          value="Registrar Producto"
+          className="mt-5 w-full bg-blue-600 p-2 text-white font-bold text-lg cursor-pointer rounded"
+          value="Register product"
         />
 
 

@@ -7,7 +7,7 @@ export default function AppLayout() {
         <header className="bg-gray-800 py-5">
             <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
                 <div className="mx-auto max-w-6xl py-10">
-                    <h1 className='text-4xl font-extrabold text-white'>Administrador de productos</h1>
+                    <h1 className='text-4xl font-extrabold text-white'>Manage products</h1>
                 </div>
             </div>
         </header>
