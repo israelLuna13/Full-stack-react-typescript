@@ -22,3 +22,13 @@ export const ProductSchemaEntry = object({
 export const ProductsShema = array(ProductShema)
 export type Product = InferOutput<typeof ProductShema>
 export type ProductEntry = InferOutput<typeof ProductSchemaEntry>
+
+//auth
+
+export const authShemaForm = object({
+    name:string(),
+    email:string(),
+    password:string(),
+    password_confirmation:string()
+})
+export type userRegistrationForm = InferOutput<typeof authShemaForm>

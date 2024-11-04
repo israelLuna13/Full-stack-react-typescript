@@ -11,12 +11,12 @@ export default function AppLayout() {
                 </div>
             </div>
         </header>
-        <section className="max-m-scree-2xl max-auto mt-10 p-5">
+        <section className="max-m-scree-2xl max-auto mt-10 p-5 bg-gray-800">
             {/* put all elements child */}
             <Outlet/>
         </section>
 
-        <footer className="py-5">
+        <footer className="py-5 bg-gray-800">
             <p className="text-center">
                 Todos los derechos resersvados {new Date().getFullYear()}
             </p>
