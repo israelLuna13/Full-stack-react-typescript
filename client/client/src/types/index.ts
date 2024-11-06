@@ -24,11 +24,15 @@ export type Product = InferOutput<typeof ProductShema>
 export type ProductEntry = InferOutput<typeof ProductSchemaEntry>
 
 //auth
-
 export const authShemaForm = object({
     name:string(),
     email:string(),
     password:string(),
     password_confirmation:string()
 })
+
+export const authTokenShema  = object({
+    token: string()
+})
 export type userRegistrationForm = InferOutput<typeof authShemaForm>
+export type confirmToken = InferOutput<typeof authTokenShema>

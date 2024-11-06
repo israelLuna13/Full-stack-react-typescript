@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { authShemaForm } from "../types";
 import { safeParse } from "valibot";
 
@@ -32,12 +32,28 @@ export async function createAccount(data:ProductData)
     }else{
         throw new Error('Datos no validos')
     }
-
     
    } catch (error) {
-    console.log(error);
-    
-    
+    if (isAxiosError(error) && error.message) 
+        throw new Error(error.response?.data.error);
    }
 
+}
+
+export async function confirmAccount(formData:ProductData)
+{
+    try {
+        const {data} = await axios.post(`${url}/confirm-account`,formData)
+        if(data.error)
+        {
+            console.log(data.error);
+            
+        }else{
+            throw new Error('Datos no validos')
+        }
+        return data;
+    } catch (error) {
+        if (isAxiosError(error) && error.message) 
+            throw new Error(error.response?.data.error);
+    }
 }

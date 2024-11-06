@@ -2,13 +2,14 @@ import { ActionFunctionArgs, Form, redirect, useActionData } from "react-router-
 import ErrorMessage from "../../components/ErrorMessage";
 import { createAccount } from "../../service/AuthService";
 
+//action for create account
 export async function action({request}:ActionFunctionArgs)
 {
     //get data form
     const data = Object.fromEntries(await request.formData())
     let error=''
     
-    //check that if there is not input empty
+    //check  if there is not input empty
     if(Object.values(data).includes(''))
         error = 'All input is required'
     
